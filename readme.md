@@ -1,0 +1,1 @@
+Calculator project down as the conclusion to The Odin Project's foundations course. This project will demonstrate the ability to use HTML, CSS, and Javascript to create a calculator web application.
