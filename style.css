@@ -1,0 +1,45 @@
+#calculator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: blue;
+    padding: 16px;
+    width: 150px;
+    gap: 10px;
+}
+
+#display {
+    background-color: grey;
+    padding: 8px;
+    width: 125px;
+}
+
+#keys {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+#operators {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 6px;
+
+}
+
+#numberPad {
+    display: flex;
+    width: 100px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+#number {
+    padding: 8px;
+}
