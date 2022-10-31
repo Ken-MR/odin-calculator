@@ -10,35 +10,29 @@
 </head>
 <body>
     <div id="calculator">
-        <div id="display">2+10=12</div>
+        <div id="display"></div>
         <div id="keys">
             <div id="numberPad">
-                <button id="number">1</button>
-                <button id="number">2</button>
-                <button id="number">3</button>
-                <button id="number">4</button>
-                <button id="number">5</button>
-                <button id="number">6</button>
-                <button id="number">7</button>
-                <button id="number">8</button>
-                <button id="number">9</button>
-                <button id="number">0</button>
+                <button id="number" onclick = "keyInput(1)">1</button>
+                <button id="number" onclick = "keyInput(2)">2</button>
+                <button id="number" onclick = "keyInput(3)">3</button>
+                <button id="number" onclick = "keyInput(4)">4</button>
+                <button id="number" onclick = "keyInput(5)">5</button>
+                <button id="number" onclick = "keyInput(6)">6</button>
+                <button id="number" onclick = "keyInput(7)">7</button>
+                <button id="number" onclick = "keyInput(8)">8</button>
+                <button id="number" onclick = "keyInput(9)">9</button>
+                <button id="number" onclick = "keyInput(0)">0</button>
             </div>
             <div id="operators">
-                <button id="op">+</button>
-                <button id="op">-</button>
-                <button id="op">x</button>
-                <button id="op">/</button>
-                <button id="op">=</button>
-                <button id="op">clear</button>
+                <button id="op" onclick = "keyInput('add')">+</button>
+                <button id="op" onclick = "keyInput('sub')">-</button>
+                <button id="op" onclick = "keyInput('mul')">x</button>
+                <button id="op" onclick = "keyInput('div')">/</button>
+                <button id="op" onclick = "calculate()">=</button>
+                <button id="op" onclick = "clearDisplay()">clear</button>
             </div>
         </div>
     </div>
-    <script>
-        console.log(operate(5, 10, 'add'))
-        console.log(operate(14, 10, 'sub'))
-        console.log(operate(2, 3, 'mul'))
-        console.log(operate(20, 2,'div'))
-    </script>
 </body>
 </html>

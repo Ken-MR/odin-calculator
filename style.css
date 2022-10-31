@@ -13,6 +13,8 @@
     background-color: grey;
     padding: 8px;
     width: 125px;
+    height: 20px;
+    align-items: center;
 }
 
 #keys {
