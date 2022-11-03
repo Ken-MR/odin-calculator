@@ -113,18 +113,29 @@ function clearDisplay () {
 // executes upon pressing the enter key. computes value of prior numbers and operators
 
 function calculate () {
-    // to be filled in
     let div = document.getElementById('display');
     // add in error handling function if user inputs an invalid sequence of characters
-
-    let processed = processDisplay();
-    let len = processed.length;
-    let a = [];
-    let b = [];
+    let result;
+    let len = displayText.length;
+    for (let i = 2; i < len; i = i+2) {
+        let a = displayText[i-2];
+        let op = displayText[i-1];
+        let b = displayText[i];
+        result = operate(a, b, op);
+        displayText[i] = result;
+    }
+    displayText = [];
+    displayText[0] = result;
+    div.innerHTML = `${result}`;
+    lastType = 'num';
 }
 
-// to be added: 
+/* to be added: 
 
-// error handling function to check if a user input an operator first or two consecutive operators
+error handling function to check if a user input an operator first,
+two consecutive operators,
+or if they have input one number and one operator without another number, ex 2 + ''
 
-// backspace key and function to remove last element from array and display
+backspace key and function to remove last element from array and display
+
+*/
