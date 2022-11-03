@@ -1,5 +1,6 @@
 // array to hold values entered from the buttons
 let displayText = [];
+let lastType = undefined;
 
 // Basic functions for various calculator operations
 
@@ -39,9 +40,11 @@ function operate (a, b, op) {
 }
 
 function keyInput (entry) {
-    displayText.push(entry);
+    //  displayText.push(entry);
     let div = document.getElementById('display');
     if ((entry === 'add') || (entry === 'sub') || (entry === 'mul') || (entry === 'div')) {
+        //console.log(typeof entry);
+        arrayInput('string', entry);
         switch(entry) {
             case 'add':
                 div.innerHTML += '+';
@@ -59,6 +62,37 @@ function keyInput (entry) {
     }
     else {
         div.innerHTML += entry;
+        arrayInput('num', entry);
+    }
+    return;
+}
+
+function arrayInput (type, entry) {
+    let len = displayText.length;
+    if (lastType === undefined) {
+        displayText.push(entry);
+        console.log(displayText);
+        lastType = type;
+        return; 
+    }
+    else if (type === 'string') {
+        displayText.push(entry);
+        console.log(displayText);
+        lastType = type;
+        return;
+    }
+    else if (lastType != 'string') {
+        let current = displayText[len - 1].toString();
+        entry.toString();
+        displayText[len - 1] = parseInt(current.concat(entry));
+        console.log(displayText);
+        return;
+    }
+    else {
+        displayText.push(entry);
+        console.log(displayText);
+        lastType = type;
+        return; 
     }
 }
 
@@ -66,12 +100,17 @@ function clearDisplay () {
     // clears current display and all array elements
     let div = document.getElementById('display');
     div.innerHTML = '';
-    let len = displayText.length;
-    for (i = 0; i < len; i++) {
-    displayText[i] = null;
-    }
+    displayText = [];
+    lastType = undefined;
 }
 
 function calculate () {
     // to be filled in
+    let div = document.getElementById('display');
+    // add in error handling function if user inputs an invalid sequence of characters
+
+    let processed = processDisplay();
+    let len = processed.length;
+    let a = [];
+    let b = [];
 }
