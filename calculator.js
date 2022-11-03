@@ -1,5 +1,7 @@
 // array to hold values entered from the buttons
 let displayText = [];
+
+// tracks last type of button pressed to properly process array values
 let lastType = undefined;
 
 // Basic functions for various calculator operations
@@ -38,6 +40,8 @@ function operate (a, b, op) {
     }
     return result;
 }
+
+// these two functions are used to properly handle button clicks and feed them into an array
 
 function keyInput (entry) {
     //  displayText.push(entry);
@@ -96,6 +100,8 @@ function arrayInput (type, entry) {
     }
 }
 
+// clears the display and resets global parameters to default values
+
 function clearDisplay () {
     // clears current display and all array elements
     let div = document.getElementById('display');
@@ -103,6 +109,8 @@ function clearDisplay () {
     displayText = [];
     lastType = undefined;
 }
+
+// executes upon pressing the enter key. computes value of prior numbers and operators
 
 function calculate () {
     // to be filled in
@@ -114,3 +122,9 @@ function calculate () {
     let a = [];
     let b = [];
 }
+
+// to be added: 
+
+// error handling function to check if a user input an operator first or two consecutive operators
+
+// backspace key and function to remove last element from array and display
