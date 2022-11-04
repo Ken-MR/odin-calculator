@@ -171,6 +171,13 @@ function error (zero) {
 // function to delete last entered value
 
 function backspace () {
+    if (lastType === undefined) {
+        return; // nothing to do, no data entered yet
+    }
+    else if (lastType === 'Error!') {
+        clearDisplay();
+        return; // clear error state
+    }
 }
 
 /* to be added: 
