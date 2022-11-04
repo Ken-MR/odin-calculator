@@ -85,13 +85,11 @@ function arrayInput (type, entry) {
     let len = displayText.length;
     if (lastType === undefined) { // condition for no data entered
         displayText.push(entry);
-        console.log(displayText);
         lastType = type;
         return; 
     }
     else if (type === 'string') { // condition if string was input last
         displayText.push(entry);
-        console.log(displayText);
         lastType = type;
         return;
     }
@@ -99,12 +97,10 @@ function arrayInput (type, entry) {
         let current = displayText[len - 1].toString();
         entry.toString();
         displayText[len - 1] = parseInt(current.concat(entry));
-        console.log(displayText);
         return;
     }
     else {  // condition if last type was string and current type is number
         displayText.push(entry);
-        console.log(displayText);
         lastType = type;
         return; 
     }
@@ -179,15 +175,26 @@ function backspace () {
         return; // clears error state
     }
     else if (lastType === 'num') {
-        let last = displayText.pop();
-        last = last.toString();
-        last = last.slice(0, -1); 
-        last = parseInt(last);
-        displayText.push(last);
         let div = document.getElementById('display');
         let display = div.innerText;
         display = display.slice(0, -1);
         div.innerHTML = `${display}`;
+        let last = displayText.pop();
+        console.log(displayText);
+        last = last.toString();
+        last = last.slice(0, -1); 
+        last = parseInt(last);
+        if (isNaN(last)) {  // checks if number still exists after backspace
+            if (displayText.length > 0) {
+                lastType = 'string';
+                return; // if all numbers erased and array exists an operator must be left
+            }
+            else {
+                clearDisplay();
+                return; // if all numbers erased and length is zero then the display is empty
+            }
+        }
+        displayText.push(last);
     }
 }
 
