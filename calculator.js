@@ -184,17 +184,19 @@ function backspace () {
         last = last.toString();
         last = last.slice(0, -1); 
         last = parseInt(last);
-        if (isNaN(last)) {  // checks if number still exists after backspace
-            if (displayText.length > 0) {
-                lastType = 'string';
-                return; // if all numbers erased and array exists an operator must be left
-            }
-            else {
-                clearDisplay();
-                return; // if all numbers erased and length is zero then the display is empty
-            }
+        if (isNaN(last) && (displayText.length > 0)) {  
+            // checks if number still exists after backspace and array isn't empty
+            lastType = 'string';
+            return; // if all numbers erased and array exists an operator must be left
         }
-        displayText.push(last);
+        else if (isNaN(last)) {
+            clearDisplay();
+            return; // if all numbers erased and length is zero then the display is empty
+        }
+        else {
+            displayText.push(last);
+            return; // if numbers exist still then the last number isn't entirely deleted
+        }
     }
 }
 
