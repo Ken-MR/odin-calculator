@@ -44,7 +44,9 @@ function operate (a, b, op) {
 // these two functions are used to properly handle button clicks and feed them into an array
 
 function keyInput (entry) {
-    //  displayText.push(entry);
+    if (lastType === 'Error!') {
+        clearDisplay();
+    }
     let div = document.getElementById('display');
     if ((entry === 'add') || (entry === 'sub') || (entry === 'mul') || (entry === 'div')) {
         //console.log(typeof entry);
@@ -115,19 +117,37 @@ function clearDisplay () {
 function calculate () {
     let div = document.getElementById('display');
     // add in error handling function if user inputs an invalid sequence of characters
+    if (((displayText[0] !== undefined) || displayText[0] === undefined)  
+    && (displayText[1] === undefined)) {
+        return; // only one character has been entered; result will always be the same
+    }
     let result;
     let len = displayText.length;
-    for (let i = 2; i < len; i = i+2) {
+    for (let i = 2; i < len; i += 2) {
         let a = displayText[i-2];
         let op = displayText[i-1];
         let b = displayText[i];
         result = operate(a, b, op);
         displayText[i] = result;
     }
+    if ((result === undefined) || (result === NaN)) {
+        error();
+        return;
+    }
     displayText = [];
     displayText[0] = result;
     div.innerHTML = `${result}`;
     lastType = 'num';
+}
+
+function error () {
+    let div = document.getElementById('display');
+    displayText = [];
+    lastType = 'Error!';
+    div.innerHTML = `${lastType}`;
+}
+
+function backspace () {
 }
 
 /* to be added: 
