@@ -19,6 +19,10 @@ function multiply (a, b) {
 }
 
 function divide (a, b) {
+    if (b === 0) {
+        error(true);
+        return 'zero';
+    }
     return a / b;
 }
 
@@ -37,6 +41,9 @@ function operate (a, b, op) {
     }
     else if (op === 'div') {
         result = divide(a, b);
+        if (result === 'zero') {
+            return result;
+        }
     }
     return result;
 }
@@ -45,11 +52,10 @@ function operate (a, b, op) {
 
 function keyInput (entry) {
     if (lastType === 'Error!') {
-        clearDisplay();
+        clearDisplay(); // wipe display so error message won't persist for new calculations
     }
     let div = document.getElementById('display');
     if ((entry === 'add') || (entry === 'sub') || (entry === 'mul') || (entry === 'div')) {
-        //console.log(typeof entry);
         arrayInput('string', entry);
         switch(entry) {
             case 'add':
@@ -72,6 +78,8 @@ function keyInput (entry) {
     }
     return;
 }
+
+// the function below handles logging information to the array for future calculations
 
 function arrayInput (type, entry) {
     let len = displayText.length;
@@ -128,6 +136,9 @@ function calculate () {
         let op = displayText[i-1];
         let b = displayText[i];
         result = operate(a, b, op);
+        if (result === 'zero') {
+            return;
+        }
         displayText[i] = result;
     }
     if ((result === undefined) || (result === NaN)) {
@@ -140,12 +151,24 @@ function calculate () {
     lastType = 'num';
 }
 
-function error () {
+// below is a function that is called when an error state is entered
+
+function error (zero) {
     let div = document.getElementById('display');
     displayText = [];
     lastType = 'Error!';
-    div.innerHTML = `${lastType}`;
+    if (zero) {
+        let div = document.getElementById('display');    
+        div.innerHTML = 'Cannot divide by zero!';
+        return;
+    }   
+    else {
+        div.innerHTML = `${lastType}`;
+        return;
+    }
 }
+
+// function to delete last entered value
 
 function backspace () {
 }
@@ -155,7 +178,10 @@ function backspace () {
 error handling function to check if a user input an operator first,
 two consecutive operators,
 or if they have input one number and one operator without another number, ex 2 + ''
+DONE
 
 backspace key and function to remove last element from array and display
+
+decimal point key
 
 */
