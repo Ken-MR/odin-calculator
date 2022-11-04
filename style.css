@@ -5,15 +5,15 @@
     flex-direction: column;
     background-color: blue;
     padding: 16px;
-    width: 150px;
+    width: 225px;
     gap: 10px;
 }
 
 #display {
     background-color: grey;
     padding: 8px;
-    width: 125px;
-    height: 20px;
+    width: 200px;
+    height: 24px;
     align-items: center;
 }
 
@@ -21,7 +21,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 12px;
 }
 
 #operators {
@@ -29,19 +29,31 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
 
 }
 
 #numberPad {
     display: flex;
-    width: 100px;
+    width: 150px;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     gap: 4px;
 }
 
-#number, #back {
-    padding: 8px;
+#number {
+    padding: 16px;
+}
+
+#zero {
+    padding: 16px 42px;
+}
+
+#op {
+    padding: 4px 16px;
+}
+
+#back, #clear {
+    padding: 4px 6px;
 }

@@ -22,8 +22,8 @@
                 <button id="number" onclick = "keyInput(7)">7</button>
                 <button id="number" onclick = "keyInput(8)">8</button>
                 <button id="number" onclick = "keyInput(9)">9</button>
-                <button id="number" onclick = "keyInput(0)">0</button>
-                <button id="back" onclick = "backspace()">Back</button>
+                <button id="zero" onclick = "keyInput(0)">0</button>
+                <button id="number" onclick = "keyInput('.')">.</button>
             </div>
             <div id="operators">
                 <button id="op" onclick = "keyInput('add')">+</button>
@@ -31,7 +31,8 @@
                 <button id="op" onclick = "keyInput('mul')">x</button>
                 <button id="op" onclick = "keyInput('div')">/</button>
                 <button id="op" onclick = "calculate()">=</button>
-                <button id="op" onclick = "clearDisplay()">clear</button>
+                <button id="back" onclick = "backspace()">Back</button>
+                <button id="clear" onclick = "clearDisplay()">Clear</button>
             </div>
         </div>
     </div>

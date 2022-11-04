@@ -21,12 +21,12 @@ function multiply (a, b) {
 function divide (a, b) {
     if (b === 0) {
         error(true);
-        return 'zero';
+        return 'zero';  // special error case for dividing by zero
     }
     return a / b;
 }
 
-// More complex functions to operate on the numbers and operators input from the browser
+// function to determine which operations to perform based on array values
 
 function operate (a, b, op) {
     let result = undefined;
@@ -48,7 +48,7 @@ function operate (a, b, op) {
     return result;
 }
 
-// these two functions are used to properly handle button clicks and feed them into an array
+// this function is used to properly handle button clicks
 
 function keyInput (entry) {
     if (lastType === 'Error!') {
@@ -178,13 +178,9 @@ function backspace () {
     else if (lastType === 'num') {
         let div = document.getElementById('display');
         let display = div.innerText;
-        display = display.slice(0, -1);
-        div.innerHTML = `${display}`;
+        div.innerHTML = `${display.slice(0, -1)}`;
         let last = displayText.pop();
-        console.log(displayText);
-        last = last.toString();
-        last = last.slice(0, -1); 
-        last = parseInt(last);
+        last = parseInt(last.toString().slice(0, -1));
         if (isNaN(last) && (displayText.length > 0)) {  
             // checks if number still exists after backspace and array isn't empty
             lastType = 'string';
@@ -202,8 +198,7 @@ function backspace () {
     else {  // state can only be entered if an operator was the last input
         let div = document.getElementById('display');
         let display = div.innerText;
-        display = display.slice(0, -1);
-        div.innerHTML = `${display}`;
+        div.innerHTML = `${display.slice(0, -1)}`;
         displayText.pop();
         if (displayText.length === 0) {
             clearDisplay();
@@ -228,6 +223,7 @@ or if they have input one number and one operator without another number, ex 2 +
 DONE
 
 backspace key and function to remove last element from array and display
+DONE
 
 decimal point key
 
