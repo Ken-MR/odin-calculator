@@ -114,6 +114,7 @@ function clearDisplay () {
     div.innerHTML = '';
     displayText = [];
     lastType = undefined;
+    return;
 }
 
 // executes upon pressing the enter key. computes value of prior numbers and operators
@@ -196,6 +197,25 @@ function backspace () {
         else {
             displayText.push(last);
             return; // if numbers exist still then the last number isn't entirely deleted
+        }
+    }
+    else {  // state can only be entered if an operator was the last input
+        let div = document.getElementById('display');
+        let display = div.innerText;
+        display = display.slice(0, -1);
+        div.innerHTML = `${display}`;
+        displayText.pop();
+        if (displayText.length === 0) {
+            clearDisplay();
+            return; // the screen is empty, reset the calculator
+        }
+        else if (isNaN(displayText.slice(-1))) {
+            lastType = 'string';
+            return; // if isNaN is true then an operator was entered last
+        }
+        else {
+            lastType = 'num';
+            return; // if isNaN returns false then a number is still in the array and display
         }
     }
 }
