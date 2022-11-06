@@ -146,7 +146,7 @@ function calculate () {
         }
         displayText[i] = result;
     }
-    if ((result === undefined) || (result === NaN)) {
+    if ((result === undefined) || (isNaN(result))) {
         error();
         return;
     }
@@ -195,10 +195,12 @@ function backspace () {
         let display = div.innerText;
         div.innerHTML = `${display.slice(0, -1)}`;
         let last = displayText.pop();
-        last = parseInt(last.toString().slice(0, -1));
+        last = last.toString().slice(0, -1);
+        // checks if number still exists after backspace and array isn't empty
         if (isNaN(last) && (displayText.length > 0)) {  
-            // checks if number still exists after backspace and array isn't empty
             lastType = 'string';
+            // no reason to disable decimal if an operator is the last entry
+            document.getElementById('decimal').disabled = false;
             return; // if all numbers erased and array exists an operator must be left
         }
         else if (isNaN(last)) {
@@ -206,6 +208,12 @@ function backspace () {
             return; // if all numbers erased and length is zero then the display is empty
         }
         else {
+            if (last.includes(".")) {  // if integer reenable decimal otherwise disable until operator
+                document.getElementById('decimal').disabled = true;
+            }
+            else {
+                document.getElementById('decimal').disabled = false;
+            }
             displayText.push(last);
             return; // if numbers exist still then the last number isn't entirely deleted
         }
