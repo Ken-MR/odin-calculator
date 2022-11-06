@@ -2,6 +2,7 @@
 let displayText = [];
 
 // tracks last type of button pressed to properly process array values
+// can be number (decimal counts as number), string, error, or undefine (no data entered yet)
 let lastType = undefined;
 
 // Basic functions for various calculator operations
@@ -92,6 +93,10 @@ function arrayInput (type, entry) {
     if (lastType === undefined) { // condition for no data entered
         displayText.push(entry);
         lastType = type;
+        if (entry === '.') {
+            // disable decimal key so only one can be input per number, any operator entry reenables
+            document.getElementById('decimal').disabled = true;
+        }
         return; 
     }
     else if (type === 'string') { // condition if string was input last
@@ -109,16 +114,13 @@ function arrayInput (type, entry) {
         }
         return;
     }
-    else if (type === 'dec') {
-        displayText.push(entry);
-        // disable decimal key so only one can be input per number, any operator entry reenables
-        document.getElementById('decimal').disabled = true;
-        lastType = 'num';   // decimal will be part of number sequence so it's treated as a number
-        return; 
-    }
     else {  // condition if last type was string and current type is number
         displayText.push(entry);
         lastType = type;
+        if (entry === '.') {
+            // disable decimal key so only one can be input per number, any operator entry reenables
+            document.getElementById('decimal').disabled = true;
+        }
         return; 
     }
 }
@@ -131,6 +133,8 @@ function clearDisplay () {
     div.innerHTML = '';
     displayText = [];
     lastType = undefined;
+    // reenable decimal key as part of data clearing
+    document.getElementById('decimal').disabled = false;
     return;
 }
 
@@ -162,7 +166,14 @@ function calculate () {
     displayText = [];
     displayText[0] = result;
     div.innerHTML = `${result}`;
-    lastType = 'num';
+    lastType = 'num';   // calculations always yield number unless error state entered
+    if (result % 1 != 0) {  // if integer reenable decimal otherwise disable until operator
+        document.getElementById('decimal').disabled = true;
+    }
+    else {
+        document.getElementById('decimal').disabled = false;
+    }
+    return;
 }
 
 // below is a function that is called when an error state is entered
