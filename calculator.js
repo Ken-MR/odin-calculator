@@ -151,7 +151,8 @@ function calculate () {
         return;
     }
     displayText = [];
-    displayText[0] = result;
+    result = parseFloat(result.toFixed(4)); // round decimal places for long numbers
+    displayText[0] = result
     div.innerHTML = `${result}`;
     lastType = 'num';   // calculations always yield number unless error state entered
     if (result % 1 != 0) {  // if integer reenable decimal otherwise disable until operator

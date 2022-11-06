@@ -13,8 +13,10 @@
     background-color: grey;
     padding: 8px;
     width: 200px;
-    height: 24px;
+    height: 32px;
     align-items: center;
+    overflow-x: scroll;
+    overflow-y: hidden;
 }
 
 #keys {
