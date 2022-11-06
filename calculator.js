@@ -75,10 +75,6 @@ function keyInput (entry) {
                 break;
         }
     }
-    else if (entry === '.') {
-        div.innerHTML += entry;
-        arrayInput('num', entry);
-    }
     else {
         div.innerHTML += entry;
         arrayInput('num', entry);
@@ -93,10 +89,7 @@ function arrayInput (type, entry) {
     if (lastType === undefined) { // condition for no data entered
         displayText.push(entry);
         lastType = type;
-        if (entry === '.') {
-            // disable decimal key so only one can be input per number, any operator entry reenables
-            document.getElementById('decimal').disabled = true;
-        }
+        decimalCheck(entry);
         return; 
     }
     else if (type === 'string') { // condition if string was input last
@@ -108,19 +101,13 @@ function arrayInput (type, entry) {
         let current = displayText[len - 1].toString();
         entry.toString();
         displayText[len - 1] = current.concat(entry);
-        if (entry === '.') {
-            // disable decimal key so only one can be input per number, any operator entry reenables
-            document.getElementById('decimal').disabled = true;
-        }
+        decimalCheck(entry);
         return;
     }
     else {  // condition if last type was string and current type is number
         displayText.push(entry);
         lastType = type;
-        if (entry === '.') {
-            // disable decimal key so only one can be input per number, any operator entry reenables
-            document.getElementById('decimal').disabled = true;
-        }
+        decimalCheck(entry);
         return; 
     }
 }
@@ -241,6 +228,16 @@ function backspace () {
             return; // if isNaN returns false then a number is still in the array and display
         }
     }
+}
+
+// function to check if a decimal point is present in the current number
+
+function decimalCheck(dec) {
+    if (dec === '.') {
+        // disable decimal key so only one can be input per number, any operator entry reenables
+        document.getElementById('decimal').disabled = true;
+    }
+    return;
 }
 
 /* to be added: 
