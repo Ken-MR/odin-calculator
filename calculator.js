@@ -169,12 +169,12 @@ function error (zero) {
     let div = document.getElementById('display');
     displayText = [];
     lastType = 'Error!';
-    if (zero) {
+    if (zero) { // special error case for dividing by zero
         let div = document.getElementById('display');    
         div.innerHTML = 'Cannot divide by zero!';
         return;
     }   
-    else {
+    else {  // general error case
         div.innerHTML = `${lastType}`;
         return;
     }
@@ -241,15 +241,7 @@ function decimalCheck(dec) {
 }
 
 /* to be added: 
+Handle long decimal strings or numbers going off the edge of the calculator screen
 
-error handling function to check if a user input an operator first,
-two consecutive operators,
-or if they have input one number and one operator without another number, ex 2 + ''
-DONE
-
-backspace key and function to remove last element from array and display
-DONE
-
-decimal point key
-
+General CSS cleanup and visual improvements
 */
