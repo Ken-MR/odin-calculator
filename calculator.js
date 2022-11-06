@@ -76,7 +76,7 @@ function keyInput (entry) {
     }
     else if (entry === '.') {
         div.innerHTML += entry;
-        arrayInput('dec', entry);
+        arrayInput('num', entry);
     }
     else {
         div.innerHTML += entry;
@@ -102,7 +102,11 @@ function arrayInput (type, entry) {
     else if (lastType != 'string') { // condition if number was input last and current type is num
         let current = displayText[len - 1].toString();
         entry.toString();
-        displayText[len - 1] = parseInt(current.concat(entry));
+        displayText[len - 1] = current.concat(entry);
+        if (entry === '.') {
+            // disable decimal key so only one can be input per number, any operator entry reenables
+            document.getElementById('decimal').disabled = true;
+        }
         return;
     }
     else if (type === 'dec') {
@@ -145,7 +149,7 @@ function calculate () {
         let a = displayText[i-2];
         let op = displayText[i-1];
         let b = displayText[i];
-        result = operate(a, b, op);
+        result = operate(parseFloat(a), parseFloat(b), op);
         if (result === 'zero') {
             return;
         }
