@@ -42,7 +42,7 @@
     gap: 4px;
 }
 
-#number {
+#number, #decimal {
     padding: 16px;
 }
 

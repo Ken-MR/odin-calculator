@@ -56,8 +56,10 @@ function keyInput (entry) {
     }
     let div = document.getElementById('display');
     if ((entry === 'add') || (entry === 'sub') || (entry === 'mul') || (entry === 'div')) {
+        // reenables decimal key because a new number will be entered next
+        document.getElementById('decimal').disabled = false;
         arrayInput('string', entry);
-        switch(entry) {
+        switch(entry) { // handles various operator entries
             case 'add':
                 div.innerHTML += '+';
                 break;
@@ -71,6 +73,10 @@ function keyInput (entry) {
                 div.innerHTML += '/';
                 break;
         }
+    }
+    else if (entry === '.') {
+        div.innerHTML += entry;
+        arrayInput('dec', entry);
     }
     else {
         div.innerHTML += entry;
@@ -98,6 +104,13 @@ function arrayInput (type, entry) {
         entry.toString();
         displayText[len - 1] = parseInt(current.concat(entry));
         return;
+    }
+    else if (type === 'dec') {
+        displayText.push(entry);
+        // disable decimal key so only one can be input per number, any operator entry reenables
+        document.getElementById('decimal').disabled = true;
+        lastType = 'num';   // decimal will be part of number sequence so it's treated as a number
+        return; 
     }
     else {  // condition if last type was string and current type is number
         displayText.push(entry);
